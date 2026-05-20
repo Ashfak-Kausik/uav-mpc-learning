@@ -1,7 +1,14 @@
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.pyo
+.ipynb_checkpoints/
 *.zip
 *.bin
 *.so
 acados/
+*.egg-info/
+.vscode/
+.idea/
+
