@@ -52,11 +52,7 @@ Position and gravity are commonly defined here.
 
 ## 2. Body Frame
 
-The body frame moves together with the drone.
-
-Rotor thrust naturally acts in the body frame because the propellers are attached to the vehicle body.
-
-A large part of quadrotor dynamics involves transforming vectors correctly between these two frames.
+The body frame moves together with the drone. Rotor thrust naturally acts in the body frame because the propellers are attached to the vehicle body. A large part of quadrotor dynamics involves transforming vectors correctly between these two frames.
 
 ---
 
@@ -74,9 +70,7 @@ where:
 - \(\ddot{r}\) = acceleration
 - \(F\) = total force
 
-This equation simply states that forces produce acceleration.
-
-The rotational dynamics come from rigid body rotational mechanics:
+This equation simply states that forces produce acceleration. The rotational dynamics come from rigid body rotational mechanics:
 
 $$
 I\dot{\omega} = \tau - \omega \times (I\omega)
@@ -88,9 +82,7 @@ where:
 - \(\omega\) = angular velocity
 - \(\tau\) = applied torque
 
-Conceptually, this equation describes how torques generate angular acceleration.
-
-Initially these equations may look intimidating, but physically they are simply describing how forces and torques affect motion.
+Conceptually, this equation describes how torques generate angular acceleration. Initially these equations may look intimidating, but physically they are simply describing how forces and torques affect motion.
 
 ---
 
@@ -108,22 +100,18 @@ At small operating regions, linear approximations are often used. However, durin
 
 # Rotor Drag and Aerodynamic Effects
 
-In simplified quadrotor models, aerodynamic effects are sometimes ignored.
-
-At low speeds this may work reasonably well.
-
-However, during aggressive motion, aerodynamic effects such as rotor drag start becoming significant.
+In simplified quadrotor models, aerodynamic effects are sometimes ignored. At low speeds this may work reasonably well. However, when it comes to aggressive motion (high-speed), aerodynamic effects such as rotor drag start becoming significant.
 
 Rotor drag creates additional forces opposing motion. These forces can slightly disturb the planned trajectory and reduce tracking accuracy.
 
 Without considering drag properly, a controller may work perfectly in simulation but produce noticeable tracking errors in real-world flight.
 
-This becomes especially important for:
+So, it's very much understandable that this becomes especially important for:
 
-- high-speed trajectory tracking
-- drone racing
-- agile aerial maneuvers
-- autonomous navigation
+- High-speed trajectory tracking.
+- Drone racing.
+- Agile aerial maneuvers.
+- Autonomous navigation.
 
 ---
 
@@ -169,18 +157,16 @@ This is why differential flatness became heavily used in quadrotor trajectory pl
 
 # Model Mismatch and Real Systems
 
-One important issue in robotics is model mismatch.
-
-A mathematical model is always an approximation of reality.
+One important issue in robotics is model mismatch. A mathematical model is always an approximation of reality.
 
 Real systems contain:
 
-- aerodynamic disturbances
-- actuator delays
-- sensor noise
-- flexible dynamics
-- turbulence
-- unmodeled nonlinearities
+- Aerodynamic disturbances.
+- Actuator delays.
+- Sensor noise.
+- Flexible dynamics.
+- Turbulence.
+- Unmodeled nonlinearities.
 
 As more realistic effects are added, the mathematical structure of the system can change.
 
@@ -189,27 +175,22 @@ In some cases:
 - original flat outputs may stop working
 - control complexity increases
 
-This creates a tradeoff between:
-
-- mathematical simplicity
-- physical realism
-
-A large portion of robotics and control research focuses on balancing these two aspects.
+There has been lots of studies around the globe for quite some times now, including the ETH Zurich Autonomous research Lab. To solve this model mismatch problems as stated above, many of the communities and research labs, combining physics-based modeling with data-driven learning instead of relying on either alone. Researchers at ETH Zurich Autonomous Systems Lab and the University of Pennsylvania GRASP Lab use ideas like differential flatness, robust control, and learning-based corrections to handle unmodeled effects such as drag and wind disturbances. At MIT Computer Science and Artificial Intelligence Laboratory, Model Predictive Control is often combined with learned residual dynamics to improve prediction accuracy in real time. At UC Berkeley Robotics and Intelligent Machines Lab, physics-informed learning is used so that neural models still obey basic physical laws. Overall, the main idea is to use simplified physics for structure and machine learning for correction. This combination allows quadrotors and other robots to remain stable and accurate even under uncertain real-world conditions.
 
 ---
 
-# Final Thoughts
+# Some Last Pep Talks
 
 Quadrotors are excellent examples of modern robotic systems because they combine multiple important areas together:
 
-- rigid body dynamics
-- nonlinear control
-- trajectory planning
-- optimization
-- feedback systems
-- aerodynamics
-- state estimation
+- rigid body dynamics.
+- nonlinear control.
+- trajectory planning.
+- optimization.
+- feedback systems.
+- aerodynamics.
+- state estimation.
 
-Although mechanically simple, their mathematical behavior becomes highly sophisticated during autonomous flight.
+Although mechanically simple, their mathematical behavior becomes highly sophisticated during autonomous flight. 
 
-Studying quadrotors provides strong intuition for understanding robotics, control systems, autonomous vehicles, and modern aerial navigation systems.
+So overall, studying quadrotors provides strong intuition for understanding robotics, control systems, autonomous vehicles, and modern aerial navigation systems.
