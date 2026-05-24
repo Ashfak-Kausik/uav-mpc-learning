@@ -33,7 +33,7 @@ This project is designed for processor-only execution. No discrete GPU is requir
 
 ## Status
 
-Stage 1 in progress.
+Stage 4 in progress.
 
 ## License
 
