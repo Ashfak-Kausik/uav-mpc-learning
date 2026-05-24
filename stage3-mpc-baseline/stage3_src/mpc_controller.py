@@ -114,10 +114,18 @@ class MPCController:
         opti.subject_to(opti.bounded(-self.rate_max,
                                      U[1:, :], self.rate_max))
 
-        # Solver settings: silent IPOPT
+        # Solver settings: silent IPOPT with relaxed convergence and better warm-starting.
         p_opts = {"print_time": False, "expand": True}
-        s_opts = {"print_level": 0, "sb": "yes", "max_iter": 200,
-                  "tol": 1e-4, "acceptable_tol": 1e-2}
+        s_opts = {
+            "print_level": 0,
+            "sb": "yes",
+            "max_iter": 500,
+            "tol": 1e-3,
+            "acceptable_tol": 1e-1,
+            "acceptable_iter": 5,
+            "warm_start_init_point": "yes",
+            "mu_strategy": "adaptive",
+        }
         opti.solver("ipopt", p_opts, s_opts)
 
         # Save for use in solve()
@@ -153,6 +161,13 @@ class MPCController:
             U_init = np.zeros_like(self._prev_U)
             U_init[:, :-1] = self._prev_U[:, 1:]
             U_init[:, -1] = self._prev_U[:, -1]
+            self.opti.set_initial(self.X, X_init)
+            self.opti.set_initial(self.U, U_init)
+        else:
+            # First call: seed with the reference trajectory and hover control.
+            # This gives IPOPT a feasible-ish starting point near the solution.
+            X_init = np.array(x_reference)
+            U_init = np.tile(self.u_hover.reshape(-1, 1), (1, self.N))
             self.opti.set_initial(self.X, X_init)
             self.opti.set_initial(self.U, U_init)
 
