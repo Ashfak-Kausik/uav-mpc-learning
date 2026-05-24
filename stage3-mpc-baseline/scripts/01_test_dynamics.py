@@ -18,9 +18,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..")))
+STAGE3_ROOT = os.path.abspath(os.path.join(HERE, ".."))
+if STAGE3_ROOT not in sys.path:
+    sys.path.insert(0, STAGE3_ROOT)
 
-from src.quadrotor_model_casadi import (
+from stage3_src.quadrotor_model_casadi import (
     integrate_trajectory,
     MASS,
     GRAVITY,

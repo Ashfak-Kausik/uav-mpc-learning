@@ -16,8 +16,6 @@ Run:
 """
 
 import argparse
-import importlib
-import importlib.util
 import os
 import sys
 import time
@@ -26,34 +24,29 @@ import mujoco
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Add Stage 2 and Stage 3 project roots to the path so we can import
+# their respective packages (stage2_src, stage3_src). No name collisions
+# because the package names differ.
 STAGE3_ROOT = os.path.abspath(os.path.join(HERE, ".."))
-
-# Stage 3 package must take precedence for stage3 src imports.
-sys.path.insert(0, STAGE3_ROOT)
-
-# Stage 2 path for reusing the motor mixer without shadowing stage3.
 STAGE2_ROOT = os.path.abspath(os.path.join(HERE, "..", "..",
                                             "stage2-mujoco-setup"))
-STAGE2_SRC = os.path.join(STAGE2_ROOT, "src")
+if STAGE3_ROOT not in sys.path:
+    sys.path.insert(0, STAGE3_ROOT)
+if STAGE2_ROOT not in sys.path:
+    sys.path.insert(0, STAGE2_ROOT)
 
-from src.mpc_controller import MPCController
-from src.body_rate_controller import BodyRateController
-from src.trajectory import hover_reference
-from src.quadrotor_model_casadi import quat_to_euler, MASS, GRAVITY
-
-# Load Stage 2 src as a separate package to preserve its relative imports.
-spec = importlib.util.spec_from_file_location(
-    "stage2_src",
-    os.path.join(STAGE2_SRC, "__init__.py"),
-    submodule_search_locations=[STAGE2_SRC],
+# Stage 3 imports.
+from stage3_src.mpc_controller import MPCController
+from stage3_src.body_rate_controller import BodyRateController
+from stage3_src.trajectory import hover_reference
+from stage3_src.quadrotor_model_casadi import (
+    quat_to_euler, MASS, GRAVITY,
 )
-stage2_src = importlib.util.module_from_spec(spec)
-sys.modules["stage2_src"] = stage2_src
-spec.loader.exec_module(stage2_src)
 
-C = importlib.import_module("stage2_src.x2_constants")
-CascadedPDController = importlib.import_module(
-    "stage2_src.cascaded_pd_controller").CascadedPDController
+# Stage 2 imports (reused: motor mixer and scene constants).
+from stage2_src import x2_constants as C
+from stage2_src.cascaded_pd_controller import CascadedPDController
 
 
 def read_state_for_mpc(data):

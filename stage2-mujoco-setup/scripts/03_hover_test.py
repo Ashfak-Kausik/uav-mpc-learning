@@ -1,5 +1,5 @@
 """
-Stage 2 — hover test for the cascaded PD controller.
+Stage 2.3: hover test for the cascaded PD controller.
 
 Starts the X2 just above the ground, commands it to hover at (0, 0, 1) m,
 and runs for a fixed duration. Logs position over time and plots the
@@ -18,12 +18,13 @@ import numpy as np
 import mujoco
 import matplotlib.pyplot as plt
 
-# Make the src module importable.
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..")))
+STAGE2_ROOT = os.path.abspath(os.path.join(HERE, ".."))
+if STAGE2_ROOT not in sys.path:
+    sys.path.insert(0, STAGE2_ROOT)
 
-from src import x2_constants as C
-from src.cascaded_pd_controller import CascadedPDController
+from stage2_src import x2_constants as C
+from stage2_src.cascaded_pd_controller import CascadedPDController
 
 
 def run_hover(use_viewer=False, duration_s=5.0, p_des=np.array([0.0, 0.0, 1.0])):

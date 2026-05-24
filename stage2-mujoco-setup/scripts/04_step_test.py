@@ -1,5 +1,5 @@
 """
-Stage 2 — step-position test.
+Stage 2:4 step-position test.
 
 Starts at hover, then commands a 2 m step in +x. Tests the position
 controller's ability to drive the drone laterally and the attitude
@@ -19,10 +19,12 @@ import mujoco
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..")))
+STAGE2_ROOT = os.path.abspath(os.path.join(HERE, ".."))
+if STAGE2_ROOT not in sys.path:
+    sys.path.insert(0, STAGE2_ROOT)
 
-from src import x2_constants as C
-from src.cascaded_pd_controller import CascadedPDController
+from stage2_src import x2_constants as C
+from stage2_src.cascaded_pd_controller import CascadedPDController
 
 
 def get_target(t, t_step=2.0):

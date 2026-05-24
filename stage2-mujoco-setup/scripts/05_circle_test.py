@@ -1,5 +1,5 @@
 """
-Stage 2.3: Circle trajectory tracking test.
+Stage 2.5: Circle trajectory tracking test.
 
 Commands the drone to fly a horizontal circle of radius R in the
 xy-plane at constant altitude. The reference position, velocity, and
@@ -27,10 +27,12 @@ import mujoco
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..")))
+STAGE2_ROOT = os.path.abspath(os.path.join(HERE, ".."))
+if STAGE2_ROOT not in sys.path:
+    sys.path.insert(0, STAGE2_ROOT)
 
-from src import x2_constants as C
-from src.cascaded_pd_controller import CascadedPDController
+from stage2_src import x2_constants as C
+from stage2_src.cascaded_pd_controller import CascadedPDController
 
 
 # Circle parameters

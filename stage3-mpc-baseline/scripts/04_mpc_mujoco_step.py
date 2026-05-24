@@ -15,7 +15,6 @@ Run:
 """
 
 import argparse
-import importlib
 import os
 import sys
 import time
@@ -24,34 +23,29 @@ import mujoco
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-STAGE3_ROOT = os.path.abspath(os.path.join(HERE, ".."))
-sys.path.insert(0, STAGE3_ROOT)
 
-# Load Stage 2 as a separate package namespace to avoid src/src conflict.
+# Add Stage 2 and Stage 3 project roots to the path so we can import
+# their respective packages (stage2_src, stage3_src). No name collisions
+# because the package names differ.
+STAGE3_ROOT = os.path.abspath(os.path.join(HERE, ".."))
 STAGE2_ROOT = os.path.abspath(os.path.join(HERE, "..", "..",
                                             "stage2-mujoco-setup"))
-sys.path.insert(0, STAGE2_ROOT)
+if STAGE3_ROOT not in sys.path:
+    sys.path.insert(0, STAGE3_ROOT)
+if STAGE2_ROOT not in sys.path:
+    sys.path.insert(0, STAGE2_ROOT)
 
-from src.mpc_controller import MPCController
-from src.body_rate_controller import BodyRateController
-from src.trajectory import step_reference
-from src.quadrotor_model_casadi import quat_to_euler, MASS, GRAVITY
+# Stage 3 imports.
+from stage3_src.mpc_controller import MPCController
+from stage3_src.body_rate_controller import BodyRateController
+from stage3_src.trajectory import step_reference
+from stage3_src.quadrotor_model_casadi import (
+    quat_to_euler, MASS, GRAVITY,
+)
 
-# Stage 2 imports via importlib (same pattern as 03 script)
-import importlib.util
-
-
-def _load_stage2_module(name):
-    path = os.path.join(STAGE2_ROOT, "src", f"{name}.py")
-    spec = importlib.util.spec_from_file_location(f"stage2_{name}", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-C = _load_stage2_module("x2_constants")
-_pd_mod = _load_stage2_module("cascaded_pd_controller")
-CascadedPDController = _pd_mod.CascadedPDController
+# Stage 2 imports (reused: motor mixer and scene constants).
+from stage2_src import x2_constants as C
+from stage2_src.cascaded_pd_controller import CascadedPDController
 
 
 def read_state_for_mpc(data):
