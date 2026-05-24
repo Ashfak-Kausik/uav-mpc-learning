@@ -2,6 +2,16 @@
 
 UAV trajectory tracking with Model Predictive Control (MPC) and a learned residual model under model mismatch. The project implements a clean nonlinear MPC for a quadrotor (Skydio X2 in MuJoCo, via CasADi) and characterizes how a small learned residual closes the gap between the nominal MPC model and a perturbed plant.
 
+## Results
+
+**MPC vs Classical PD Control:**
+
+![MPC vs PD Comparison](figures/comparison_pd_vs_mpc.png)
+
+**Simulation in Action:**
+
+[![Watch the simulation](https://img.shields.io/badge/▶️-Watch%20Simulation-blue?style=for-the-badge)](videos/UAV%20Drone%20Sim%20with%20MPC.webm)
+
 ## Motivation
 
 Nominal MPC assumes a perfect dynamics model. Real quadrotor systems exhibit model mismatch from payload variation, aerodynamic effects, and manufacturing tolerances. This project measures, in a controlled simulator setting, how tracking performance degrades under model mismatch and how much of that gap a small CPU-trainable residual model can recover.
