@@ -4,13 +4,13 @@ UAV trajectory tracking with Model Predictive Control (MPC) and a learned residu
 
 ## Results
 
+**Simulation in Action:**
+
+![UAV MPC Simulation](videos/uav_mpc_demo.gif)
+
 **MPC vs Classical PD Control:**
 
 ![MPC vs PD Comparison](figures/comparison_pd_vs_mpc.png)
-
-**Simulation in Action:**
-
-[![Watch the simulation](https://img.shields.io/badge/▶️-Watch%20Simulation-blue?style=for-the-badge)](videos/UAV%20Drone%20Sim%20with%20MPC.webm)
 
 ## Motivation
 
