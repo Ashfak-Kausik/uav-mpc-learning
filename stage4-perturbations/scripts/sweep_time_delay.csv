@@ -1,0 +1,11 @@
+delay_ms,rms_cm,max_cm,stable
+0.0,1.6461179192978515,1.6800705637895839,True
+5.0,1.6461179192978515,1.6800705637895839,True
+10.0,1.6461179192978515,1.6800705637895839,True
+15.0,inf,inf,False
+20.0,inf,inf,False
+25.0,inf,inf,False
+30.0,inf,inf,False
+35.0,inf,inf,False
+40.0,inf,inf,False
+50.0,inf,inf,False
