@@ -11,4 +11,5 @@ acados/
 *.egg-info/
 .vscode/
 .idea/
+stage5-learned-residual/data/
 

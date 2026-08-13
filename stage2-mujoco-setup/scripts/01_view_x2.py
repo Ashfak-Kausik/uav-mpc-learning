@@ -1,5 +1,5 @@
 """
-Stage 2 - A quick visual check on the Skydio X2 model in MuJoCo (checking if it loads correctly).
+Stage 2.1: A quick visual check on the Skydio X2 model in MuJoCo (checking if it loads correctly).
 
 Loads the scene, prints out the model structure information (number of bodies, joints, actuators, etc),
 then opens the MuJoCo viewer with no controller. 

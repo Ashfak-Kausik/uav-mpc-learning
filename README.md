@@ -14,7 +14,7 @@ UAV trajectory tracking with Model Predictive Control (MPC) and a learned residu
 
 ## Motivation
 
-Nominal MPC assumes a perfect dynamics model. Real quadrotor systems exhibit model mismatch from payload variation, aerodynamic effects, and manufacturing tolerances. This project measures, in a controlled simulator setting, how tracking performance degrades under model mismatch and how much of that gap a small CPU-trainable residual model can recover.
+Nominal MPC assumes a perfect dynamics model. Real quadrotor systems exhibit model mismastch from payload variation, aerodynamic effects, and manufacturing tolerances. This project measures, in a controlled simulator setting, how tracking performance degrades under model mismatch and how much of that gap a small CPU-trainable residual model can recover.
 
 ## Approach
 
@@ -43,7 +43,7 @@ This project is designed for processor-only execution. No discrete GPU is requir
 
 ## Status
 
-Stage 4 in progress.
+Stages 1–5 complete: baseline PD and MPC controllers validated, five perturbation types characterized, and a learned residual model trained and evaluated (both the in-constraint and feedforward integration architectures). Paper drafted and submitted to IEEE iCONNECT 2026 (BD); currently under review.
 
 ## License
 
